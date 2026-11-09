@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Productos</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 40px 20px;
+            margin: 0;
+        }
+        h1 { text-align: center; color: var(--primary); margin-bottom: 40px; }
+        
+        /* Contenedor del catálogo */
+        #productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+        }
+        
+        /* Tarjetas de producto */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .product-card h3 { margin-top: 0; color: var(--text); font-size: 1.25rem; }
+        .product-card p { color: #6b7280; margin: 8px 0; font-size: 0.95rem; }
+        
+        /* Contenedor de botones de la tarjeta */
+        .card-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        /* Botones generales */
+        button, .btn-link {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background-color 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            flex: 1;
+        }
+        .btn-detalle { background-color: var(--primary); color: white; }
+        .btn-detalle:hover { background-color: var(--primary-hover); }
+        .btn-editar { background-color: var(--warning); color: white; }
+        .btn-editar:hover { background-color: #d97706; }
+        .btn-eliminar { background-color: var(--danger); color: white; }
+        .btn-eliminar:hover { background-color: #dc2626; }
+
+        /* Formulario */
+        .form-container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 { text-align: center; color: var(--primary); margin-top: 0; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; color: var(--text); }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--primary); }
+        
+        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-crear { background-color: var(--success); color: white; }
+        .btn-crear:hover { background-color: #059669; }
+        .btn-actualizar { background-color: var(--warning); color: white; }
+        .btn-actualizar:hover { background-color: #d97706; }
+    </style>
+</head>
+<body>
+
+    <h1>Listado de Productos</h1>
+
+    <!-- Contenedor del catálogo -->
+    <div id="productos"></div>
+
+    <!-- Formulario para agregar/actualizar productos -->
+    <div class="form-container" id="formularioProducto">
+        <h3>Nuevo Producto</h3>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre del Producto:</label>
+            <input type="text" id="nombre" placeholder="Ej. Manzana">
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" min="0" placeholder="Ej. 10">
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio ($):</label>
+            <input type="number" id="precio" min="0" placeholder="Ej. 1500">
+        </div>
+        
+        <!-- Botones en la parte de abajo -->
+        <div class="form-actions">
+            <button id="btnCrear" class="btn-crear" style="flex: 1;">Crear Producto</button>
+            <button id="btnActualizar" class="btn-actualizar" style="display: none; flex: 1;">Actualizar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
